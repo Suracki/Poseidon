@@ -16,6 +16,10 @@ public class CurvePoint {
     private Double value;
     private Timestamp creationDate;
 
+
+    public CurvePoint() {
+    }
+
     public CurvePoint(int curveId, double term, double value) {
         this.curveId = curveId;
         this.term = term;
