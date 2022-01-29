@@ -15,12 +15,6 @@ import java.net.InetAddress;
 
 /**
  * SpringSecurity Configuration
- *
- * As this API is not intended to be public-facing, and will only be accessed by the frontend application itself,
- * configuration is currently set up to simply block all access from non-authorized IP addresses.
- *
- * The application.properties file has an entry for an IP addresses in frontend.app.ip
- * This variable is set to a localhost IP by default, and should be updated to whatever IP the frontend will connect from
  */
 @Configuration
 @EnableWebSecurity
