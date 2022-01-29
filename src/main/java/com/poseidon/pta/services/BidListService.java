@@ -16,6 +16,8 @@ public class BidListService {
 
     public String home(Model model)
     {
+        // TODO: call service find all bids to show to the view
+        //done?
         model.addAttribute("bidLists", bidListRepository.findAll());
         return "bidList/list";
     }
