@@ -1,10 +1,8 @@
 package com.poseidon.pta.controllers;
 
 import com.poseidon.pta.domain.User;
-import com.poseidon.pta.repositories.UserRepository;
 import com.poseidon.pta.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -27,8 +25,8 @@ public class UserController {
     }
 
     @GetMapping("/user/add")
-    public String addUser(User bid) {
-        return userService.addUser(bid);
+    public String addUser(User user) {
+        return userService.addUser(user);
     }
 
     @PostMapping("/user/validate")
