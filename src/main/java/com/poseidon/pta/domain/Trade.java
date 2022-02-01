@@ -1,6 +1,8 @@
 package com.poseidon.pta.domain;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.sql.Timestamp;
 
 
@@ -10,8 +12,11 @@ public class Trade {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Integer tradeId;
+    @NotBlank(message = "account is mandatory")
     private String account;
+    @NotBlank(message = "type is mandatory")
     private String type;
+    @NotNull(message = "BuyQuantity is mandatory")
     private Double buyQuantity;
     private Double sellQuantity;
     private Double buyPrice;
@@ -37,6 +42,12 @@ public class Trade {
     public Trade(String account, String type) {
         this.account = account;
         this.type = type;
+    }
+
+    public Trade(String account, String type, Double buyQuantity) {
+        this.account = account;
+        this.type = type;
+        this.buyQuantity = buyQuantity;
     }
 
     public Integer getTradeId() {

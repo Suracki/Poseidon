@@ -1,6 +1,8 @@
 package com.poseidon.pta.domain;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "rating")
@@ -8,9 +10,13 @@ public class Rating {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Integer id;
+    @NotBlank(message = "moodysRating is mandatory")
     private String moodysRating;
+    @NotBlank(message = "sandPRating is mandatory")
     private String sandPRating;
+    @NotBlank(message = "fitchRating is mandatory")
     private String fitchRating;
+    @NotNull
     private Integer orderNumber;
 
     public Rating() {

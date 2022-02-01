@@ -10,7 +10,6 @@ import java.sql.Timestamp;
 public class BidList {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
-    //@Column(name = "BidListId")
     private Integer BidListId;
     @NotBlank(message = "Account is mandatory")
     @Column(name = "account")
@@ -19,7 +18,6 @@ public class BidList {
     @Column(name = "type")
     private String type;
     @NotNull(message = "BidQuantity is mandatory")
-    //@Column(name = "bidQuantity")
     private Double bidQuantity;
     private Double askQuantity;
     private Double bid;

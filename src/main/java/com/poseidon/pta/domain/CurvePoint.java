@@ -1,6 +1,9 @@
 package com.poseidon.pta.domain;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import java.sql.Timestamp;
 
 
@@ -10,9 +13,12 @@ public class CurvePoint {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Integer id;
+    @NotNull
     private Integer curveId;
     private Timestamp asOfDate;
+    @NotNull
     private Double term;
+    @NotNull
     private Double value;
     private Timestamp creationDate;
 
