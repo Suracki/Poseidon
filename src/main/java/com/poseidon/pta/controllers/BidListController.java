@@ -27,7 +27,7 @@ public class BidListController {
 
     @GetMapping("/bidList/add")
     public String addBidForm(BidList bid) {
-        return bidListService.addBidForm(bid);
+        return bidListService.addForm(bid);
     }
 
     @PostMapping("/bidList/validate")
@@ -43,11 +43,11 @@ public class BidListController {
     @PostMapping("/bidList/update/{id}")
     public String updateBid(@PathVariable("id") Integer id, @Valid BidList bidList,
                              BindingResult result, Model model) {
-        return bidListService.updateBid(id, bidList, result, model);
+        return bidListService.update(id, bidList, result, model);
     }
 
     @GetMapping("/bidList/delete/{id}")
     public String deleteBid(@PathVariable("id") Integer id, Model model) {
-        return bidListService.deleteBid(id, model);
+        return bidListService.delete(id, model);
     }
 }

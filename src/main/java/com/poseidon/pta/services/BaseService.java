@@ -49,6 +49,7 @@ public abstract class BaseService<Element> {
 
     public String delete( Integer id, Model model) {
         Element e = repository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid " +type + " Id:" + id));
+        repository.delete(e);
         model.addAttribute(type + "s", repository.findAll());
         return "redirect:/" + type + "/list";
     }

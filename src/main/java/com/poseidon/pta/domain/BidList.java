@@ -1,6 +1,8 @@
 package com.poseidon.pta.domain;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.sql.Timestamp;
 
 @Entity
@@ -8,9 +10,16 @@ import java.sql.Timestamp;
 public class BidList {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
+    //@Column(name = "BidListId")
     private Integer BidListId;
+    @NotBlank(message = "Account is mandatory")
+    @Column(name = "account")
     private String account;
+    @NotBlank(message = "Type is mandatory")
+    @Column(name = "type")
     private String type;
+    @NotNull(message = "BidQuantity is mandatory")
+    //@Column(name = "bidQuantity")
     private Double bidQuantity;
     private Double askQuantity;
     private Double bid;
@@ -31,10 +40,38 @@ public class BidList {
     private String sourceListId;
     private String side;
 
+    @Override
+    public String toString() {
+        return "BidList{" +
+                "BidListId=" + BidListId +
+                ", account='" + account + '\'' +
+                ", type='" + type + '\'' +
+                ", bidQuantity=" + bidQuantity +
+                ", askQuantity=" + askQuantity +
+                ", bid=" + bid +
+                ", ask=" + ask +
+                ", benchmark='" + benchmark + '\'' +
+                ", bidListDate=" + bidListDate +
+                ", commentary='" + commentary + '\'' +
+                ", security='" + security + '\'' +
+                ", status='" + status + '\'' +
+                ", trader='" + trader + '\'' +
+                ", book='" + book + '\'' +
+                ", creationName='" + creationName + '\'' +
+                ", creationDate=" + creationDate +
+                ", revisionName='" + revisionName + '\'' +
+                ", revisionDate=" + revisionDate +
+                ", dealName='" + dealName + '\'' +
+                ", dealType='" + dealType + '\'' +
+                ", sourceListId='" + sourceListId + '\'' +
+                ", side='" + side + '\'' +
+                '}';
+    }
+
     public BidList() {
     }
 
-    public BidList(String account, String type, double bidQuantity) {
+    public BidList(String account, String type, Double bidQuantity) {
         this.account = account;
         this.type = type;
         this.bidQuantity = bidQuantity;

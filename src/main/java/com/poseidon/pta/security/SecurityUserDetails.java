@@ -6,11 +6,11 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 
-public class CustomUserDetails implements UserDetails {
+public class SecurityUserDetails implements UserDetails {
 
     private User user;
 
-    public CustomUserDetails(User user) {
+    public SecurityUserDetails(User user) {
         this.user = user;
     }
 
@@ -28,6 +28,8 @@ public class CustomUserDetails implements UserDetails {
     public String getUsername() {
         return user.getUsername();
     }
+
+    public int getId() { return user.getId();}
 
     @Override
     public boolean isAccountNonExpired() {

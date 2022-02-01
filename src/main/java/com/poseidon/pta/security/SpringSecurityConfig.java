@@ -1,8 +1,7 @@
-package com.poseidon.pta.configuration;
+package com.poseidon.pta.security;
 
 import javax.sql.DataSource;
 
-import com.poseidon.pta.security.CustomUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -26,7 +25,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Bean
     public UserDetailsService userDetailsService() {
-        return new CustomUserDetailsService();
+        return new SecurityUserDetailsService();
     }
 
     @Bean
