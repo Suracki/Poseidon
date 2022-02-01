@@ -13,19 +13,19 @@ public class CurveService extends BaseService<CurvePoint>{
     private CurvePointRepository curvePointRepository;
 
     public CurveService() {
-        super("curve");
+        super("curvePoint");
     }
 
     public String update(Integer id, CurvePoint curve,
                                   BindingResult result, Model model){
         if (result.hasErrors()) {
-            return "curve/update";
+            return "curvePoint/update";
         }
 
         curve.setId(id);
         curvePointRepository.save(curve);
-        model.addAttribute("curves", curvePointRepository.findAll());
-        return "redirect:/curve/list";
+        model.addAttribute("curvePoints", curvePointRepository.findAll());
+        return "redirect:/curvePoint/list";
     }
 
 }
