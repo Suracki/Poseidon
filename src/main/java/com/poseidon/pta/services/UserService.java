@@ -8,8 +8,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 
-import javax.validation.Valid;
-
 @Service
 public class UserService {
 

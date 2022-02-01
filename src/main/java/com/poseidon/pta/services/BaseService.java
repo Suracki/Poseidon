@@ -1,6 +1,5 @@
 package com.poseidon.pta.services;
 
-import com.poseidon.pta.domain.BidList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.ui.Model;
@@ -25,7 +24,7 @@ public abstract class BaseService<Element> {
         return type + "/list";
     }
 
-    public String addForm(BidList bid) {
+    public String addForm(Element e) {
         return type + "/add";
     }
 
@@ -46,6 +45,7 @@ public abstract class BaseService<Element> {
 
     public abstract String update(Integer id, Element e,
                             BindingResult result, Model model);
+
 
     public String delete( Integer id, Model model) {
         Element e = repository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid " +type + " Id:" + id));
