@@ -13,7 +13,7 @@ public class User {
     @NotBlank(message = "Username is mandatory")
     private String username;
     @Pattern(regexp = "^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!£@#$%]).{8,20}$",
-    message="Password must be 8-20 characters and include at least one uppercase letter, one number, and one symbol (!£@#$%).")
+    message="Password must be 8-20 characters and include at least one lowercase letter, one uppercase letter, one number, and one symbol (!£@#$%).")
     private String password;
     @NotBlank(message = "FullName is mandatory")
     private String fullname;

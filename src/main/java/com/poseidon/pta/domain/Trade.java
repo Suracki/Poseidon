@@ -12,9 +12,9 @@ public class Trade {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Integer tradeId;
-    @NotBlank(message = "account is mandatory")
+    @NotBlank(message = "Account is mandatory")
     private String account;
-    @NotBlank(message = "type is mandatory")
+    @NotBlank(message = "Type is mandatory")
     private String type;
     @NotNull(message = "BuyQuantity is mandatory")
     private Double buyQuantity;

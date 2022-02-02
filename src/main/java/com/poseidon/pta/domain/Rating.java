@@ -10,13 +10,13 @@ public class Rating {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Integer id;
-    @NotBlank(message = "moodysRating is mandatory")
+    @NotBlank(message = "MoodysRating is mandatory")
     private String moodysRating;
-    @NotBlank(message = "sandPRating is mandatory")
+    @NotBlank(message = "SandPRating is mandatory")
     private String sandPRating;
-    @NotBlank(message = "fitchRating is mandatory")
+    @NotBlank(message = "FitchRating is mandatory")
     private String fitchRating;
-    @NotNull
+    @NotNull(message = "OrderNumber is mandatory")
     private Integer orderNumber;
 
     public Rating() {
