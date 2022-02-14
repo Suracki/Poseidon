@@ -1,59 +1,88 @@
 package com.poseidon.pta.services;
 
-import com.poseidon.pta.repositories.UserRepository;
+import com.poseidon.pta.domain.DomainElement;
+import com.poseidon.pta.repositories.RepositoryFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 
 import javax.validation.Valid;
 
-public abstract class BaseService<Element> {
+public abstract class BaseService <E extends DomainElement> {
 
-    @Autowired
-    private JpaRepository<Element, Integer> repository;
-    private String type;
+    //@Autowired
+    private JpaRepository<E, Integer> repository;
 
-    public BaseService(String type) {
-        this.type = type;
+
+
+
+    public BaseService(JpaRepository<E, Integer> repository) {
+        this.repository = repository;
     }
 
+//    private JpaRepository<? extends DomainElement, Integer> repository2;
+//    public BaseService() {
+//        RepositoryFactory repositoryFactory = new RepositoryFactory();
+//        String className = getClass().getSimpleName().replace("Service","");
+//        System.out.println(className.substring(0,1).toLowerCase() + className.substring(1));
+//        this.repository2 = repositoryFactory.getRepository(className.substring(0,1).toLowerCase() + className.substring(1));
+//        System.out.println(repository2 == null);
+//    }
+
+
+    private String getType() {
+        String className = getClass().getSimpleName().replace("Service","");
+        return className.substring(0,1).toLowerCase() + className.substring(1);
+    }
 
     public String home(Model model)
     {
-        model.addAttribute(type + "s", repository.findAll());
-        return type + "/list";
+        model.addAttribute(getType() + "s", repository.findAll());
+        return getType() + "/list";
     }
 
-    public String addForm(Element e) {
-        return type + "/add";
+    public String addForm(DomainElement e) {
+        return getType() + "/add";
     }
 
-    public String validate(@Valid Element e, BindingResult result, Model model) {
+    public void dostuff(E e) {
+        e.setId(1);
+    }
+
+    public String validate(@Valid E e, BindingResult result, Model model) {
         if (!result.hasErrors()){
             repository.save(e);
-            model.addAttribute(type + "s", repository.findAll());
-            return "redirect:/" + type + "/list";
+            model.addAttribute(getType() + "s", repository.findAll());
+            return "redirect:/" + getType() + "/list";
         }
-        return type + "/add";
+        return getType() + "/add";
     }
 
     public String showUpdateForm(Integer id, Model model) {
-        Element e = repository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid " + type + " id:" + id));
-        model.addAttribute(type, e);
-        return type + "/update";
+        DomainElement e = repository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid " + getType() + " id:" + id));
+        model.addAttribute(getType(), e);
+        return getType() + "/update";
     }
 
-    public abstract String update(Integer id, Element e,
-                            BindingResult result, Model model);
+    public String update(Integer id, E e,
+                            BindingResult result, Model model) {
+        if (result.hasErrors()) {
+            return getType() + "/update";
+        }
+
+        e.setId(id);
+        repository.save(e);
+        model.addAttribute(getType() + "s", repository.findAll());
+        return "redirect:/" + getType() + "/list";
+    }
 
 
     public String delete( Integer id, Model model) {
-        Element e = repository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid " +type + " Id:" + id));
+        E e = repository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid " + getType() + " Id:" + id));
         repository.delete(e);
-        model.addAttribute(type + "s", repository.findAll());
-        return "redirect:/" + type + "/list";
+        model.addAttribute(getType() + "s", repository.findAll());
+        return "redirect:/" + getType() + "/list";
     }
 
 }

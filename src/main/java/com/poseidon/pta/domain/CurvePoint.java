@@ -7,17 +7,20 @@ import java.sql.Timestamp;
 
 @Entity
 @Table(name = "curvepoint")
-public class CurvePoint {
+public class CurvePoint implements DomainElement {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Integer id;
     @NotNull(message = "CurveId is mandatory")
+    @Column(name = "curveid")
     private Integer curveId;
+    @Column(name = "asofdate")
     private Timestamp asOfDate;
     @NotNull(message = "Term is mandatory")
     private Double term;
     @NotNull(message = "Value is mandatory")
     private Double value;
+    @Column(name = "creationdate")
     private Timestamp creationDate;
 
 

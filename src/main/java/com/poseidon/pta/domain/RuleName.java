@@ -5,7 +5,7 @@ import javax.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "rulename")
-public class RuleName {
+public class RuleName implements DomainElement {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Integer id;
@@ -18,8 +18,10 @@ public class RuleName {
     @NotBlank(message = "Template is mandatory")
     private String template;
     @NotBlank(message = "SQLStr is mandatory")
+    @Column(name = "sqlstr")
     private String sqlStr;
     @NotBlank(message = "SQLPart is mandatory")
+    @Column(name = "sqlpart")
     private String sqlPart;
 
     public RuleName() {

@@ -45,7 +45,7 @@ public class SecurityTests {
 
     @Test
     public void userLoginTest() throws Exception {
-        mockMvc.perform(formLogin("/login").user("testvalid").password("password")).andExpect(authenticated());
+        mockMvc.perform(formLogin("/login").user("testvalid").password("Passw0rd£$%")).andExpect(authenticated());
     }
 
     @Test

@@ -1,8 +1,7 @@
 package com.poseidon.pta.controllers;
 
 import com.poseidon.pta.domain.CurvePoint;
-import com.poseidon.pta.services.BidListService;
-import com.poseidon.pta.services.CurveService;
+import com.poseidon.pta.services.CurvePointService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,37 +16,37 @@ import javax.validation.Valid;
 @Controller
 public class CurveController {
     @Autowired
-    private CurveService curveService;
+    private CurvePointService curvePointService;
 
     @RequestMapping("/curvePoint/list")
     public String home(Model model)
     {
-        return curveService.home(model);
+        return curvePointService.home(model);
     }
 
     @GetMapping("/curvePoint/add")
     public String addForm(CurvePoint curvePoint) {
-        return curveService.addForm(curvePoint);
+        return curvePointService.addForm(curvePoint);
     }
 
     @PostMapping("/curvePoint/validate")
     public String validate(@Valid CurvePoint curvePoint, BindingResult result, Model model) {
-        return curveService.validate(curvePoint, result, model);
+        return curvePointService.validate(curvePoint, result, model);
     }
 
     @GetMapping("/curvePoint/update/{id}")
     public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
-        return curveService.showUpdateForm(id, model);
+        return curvePointService.showUpdateForm(id, model);
     }
 
     @PostMapping("/curvePoint/update/{id}")
     public String update(@PathVariable("id") Integer id, @Valid CurvePoint curvePoint,
                              BindingResult result, Model model) {
-        return curveService.update(id, curvePoint, result, model);
+        return curvePointService.update(id, curvePoint, result, model);
     }
 
     @GetMapping("/curvePoint/delete/{id}")
     public String delete(@PathVariable("id") Integer id, Model model) {
-        return curveService.delete(id, model);
+        return curvePointService.delete(id, model);
     }
 }
