@@ -29,7 +29,7 @@ public class TradeJPATests extends BaseJPA {
     private TradeRepository tradeRepository;
 
     @Test
-    void testCreateUserEntry() {
+    void testCreateTradeEntry() {
         assertThat(tradeRepository.findById(1)).isEmpty();
 
         Trade trade = new Trade();
@@ -43,7 +43,7 @@ public class TradeJPATests extends BaseJPA {
 
     @Test
     @DatabaseSetup(value = {"classpath:trade.xml"}, type = DatabaseOperation.CLEAN_INSERT)
-    void testReadUserEntry() {
+    void testReadTradeEntry() {
         assertNotNull(tradeRepository.findById(1));
         assertNotNull(tradeRepository.findById(2));
     }
@@ -51,7 +51,7 @@ public class TradeJPATests extends BaseJPA {
 
     @Test
     @DatabaseSetup(value = {"classpath:trade.xml"}, type = DatabaseOperation.CLEAN_INSERT)
-    void testUpdateUserEntry() {
+    void testUpdateTradeEntry() {
         String beforeAccount = tradeRepository.getById(1).getAccount();
 
         Trade trade = new Trade();
@@ -69,7 +69,7 @@ public class TradeJPATests extends BaseJPA {
 
     @Test
     @DatabaseSetup(value = {"classpath:trade.xml"}, type = DatabaseOperation.CLEAN_INSERT)
-    void testDeleteUserEntry() {
+    void testDeleteTradeEntry() {
         assertThat(tradeRepository.findById(1)).isNotEmpty();
 
         Trade trade = new Trade();

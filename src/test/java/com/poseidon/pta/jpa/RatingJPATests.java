@@ -26,7 +26,7 @@ public class RatingJPATests extends BaseJPA {
     private RatingRepository ratingRepository;
 
     @Test
-    void testCreateUserEntry() {
+    void testCreateRatingEntry() {
         assertThat(ratingRepository.findById(1)).isEmpty();
 
         Rating rating = new Rating();
@@ -42,7 +42,7 @@ public class RatingJPATests extends BaseJPA {
 
     @Test
     @DatabaseSetup(value = {"classpath:rating.xml"}, type = DatabaseOperation.CLEAN_INSERT)
-    void testReadUserEntry() {
+    void testReadRatingEntry() {
         assertNotNull(ratingRepository.findById(1));
         assertNotNull(ratingRepository.findById(2));
     }
@@ -50,7 +50,7 @@ public class RatingJPATests extends BaseJPA {
 
     @Test
     @DatabaseSetup(value = {"classpath:rating.xml"}, type = DatabaseOperation.CLEAN_INSERT)
-    void testUpdateUserEntry() {
+    void testUpdateRatingEntry() {
         int beforeOrderNumber = ratingRepository.getById(1).getOrderNumber();
 
         Rating rating = new Rating();
@@ -69,7 +69,7 @@ public class RatingJPATests extends BaseJPA {
 
     @Test
     @DatabaseSetup(value = {"classpath:rating.xml"}, type = DatabaseOperation.CLEAN_INSERT)
-    void testDeleteUserEntry() {
+    void testDeleteRatingEntry() {
         assertThat(ratingRepository.findById(1)).isNotEmpty();
 
         Rating rating = new Rating();

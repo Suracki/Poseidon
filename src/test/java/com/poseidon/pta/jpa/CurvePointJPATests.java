@@ -26,7 +26,7 @@ public class CurvePointJPATests extends BaseJPA {
     private CurvePointRepository curvePointRepository;
 
     @Test
-    void testCreateUserEntry() {
+    void testCreateCurveEntry() {
         assertThat(curvePointRepository.findById(1)).isEmpty();
 
         CurvePoint curvePoint = new CurvePoint();
@@ -41,7 +41,7 @@ public class CurvePointJPATests extends BaseJPA {
 
     @Test
     @DatabaseSetup(value = {"classpath:curvepoint.xml"}, type = DatabaseOperation.CLEAN_INSERT)
-    void testReadUserEntry() {
+    void testReadCurveEntry() {
         assertNotNull(curvePointRepository.findById(1));
         assertNotNull(curvePointRepository.findById(2));
     }
@@ -49,7 +49,7 @@ public class CurvePointJPATests extends BaseJPA {
 
     @Test
     @DatabaseSetup(value = {"classpath:curvepoint.xml"}, type = DatabaseOperation.CLEAN_INSERT)
-    void testUpdateUserEntry() {
+    void testUpdateCurveEntry() {
         int beforeCurveId = curvePointRepository.getById(1).getCurveId();
 
         CurvePoint curvePoint = new CurvePoint();
@@ -67,7 +67,7 @@ public class CurvePointJPATests extends BaseJPA {
 
     @Test
     @DatabaseSetup(value = {"classpath:curvepoint.xml"}, type = DatabaseOperation.CLEAN_INSERT)
-    void testDeleteUserEntry() {
+    void testDeleteCurveEntry() {
         assertThat(curvePointRepository.findById(1)).isNotEmpty();
 
         CurvePoint curvePoint = new CurvePoint();

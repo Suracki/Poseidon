@@ -26,7 +26,7 @@ public class RuleNameJPATests extends BaseJPA {
     private RuleNameRepository ruleNameRepository;
 
     @Test
-    void testCreateUserEntry() {
+    void testCreateRuleEntry() {
         assertThat(ruleNameRepository.findById(1)).isEmpty();
 
         RuleName ruleName = new RuleName();
@@ -44,7 +44,7 @@ public class RuleNameJPATests extends BaseJPA {
 
     @Test
     @DatabaseSetup(value = {"classpath:rulename.xml"}, type = DatabaseOperation.CLEAN_INSERT)
-    void testReadUserEntry() {
+    void testReadRuleEntry() {
         assertNotNull(ruleNameRepository.findById(1));
         assertNotNull(ruleNameRepository.findById(2));
     }
@@ -52,7 +52,7 @@ public class RuleNameJPATests extends BaseJPA {
 
     @Test
     @DatabaseSetup(value = {"classpath:rulename.xml"}, type = DatabaseOperation.CLEAN_INSERT)
-    void testUpdateUserEntry() {
+    void testUpdateRuleEntry() {
         String beforeName = ruleNameRepository.getById(1).getName();
 
         RuleName ruleName = new RuleName();
@@ -73,7 +73,7 @@ public class RuleNameJPATests extends BaseJPA {
 
     @Test
     @DatabaseSetup(value = {"classpath:rulename.xml"}, type = DatabaseOperation.CLEAN_INSERT)
-    void testDeleteUserEntry() {
+    void testDeleteRuleEntry() {
         assertThat(ruleNameRepository.findById(1)).isNotEmpty();
 
         RuleName ruleName = new RuleName();

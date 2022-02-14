@@ -25,7 +25,7 @@ public class BidListJPATests extends BaseJPA{
     private BidListRepository bidListRepository;
 
     @Test
-    void testCreateUserEntry() {
+    void testCreateBidEntry() {
         assertThat(bidListRepository.findById(1)).isEmpty();
 
         BidList testBidList = new BidList();
@@ -39,7 +39,7 @@ public class BidListJPATests extends BaseJPA{
 
     @Test
     @DatabaseSetup(value = {"classpath:bidlist.xml"}, type = DatabaseOperation.CLEAN_INSERT)
-    void testReadUserEntry() {
+    void testReadBidEntry() {
         assertNotNull(bidListRepository.findById(1));
         assertNotNull(bidListRepository.findById(2));
     }
@@ -47,7 +47,7 @@ public class BidListJPATests extends BaseJPA{
 
     @Test
     @DatabaseSetup(value = {"classpath:bidlist.xml"}, type = DatabaseOperation.CLEAN_INSERT)
-    void testUpdateUserEntry() {
+    void testUpdateBidEntry() {
         String beforeAccount = bidListRepository.getById(1).getAccount();
 
         BidList testBidList = new BidList();
@@ -65,7 +65,7 @@ public class BidListJPATests extends BaseJPA{
 
     @Test
     @DatabaseSetup(value = {"classpath:bidlist.xml"}, type = DatabaseOperation.CLEAN_INSERT)
-    void testDeleteUserEntry() {
+    void testDeleteBidEntry() {
         assertThat(bidListRepository.findById(1)).isNotEmpty();
 
         BidList testBidList = new BidList();

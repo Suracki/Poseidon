@@ -2,8 +2,6 @@ package com.poseidon.pta.services;
 
 import com.poseidon.pta.domain.BidList;
 import com.poseidon.pta.repositories.BidListRepository;
-import net.bytebuddy.dynamic.DynamicType;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mockito;
@@ -26,11 +24,8 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doReturn;
-import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestBuilders.formLogin;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
-import static org.springframework.security.test.web.servlet.response.SecurityMockMvcResultMatchers.authenticated;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
@@ -38,7 +33,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 @AutoConfigureMockMvc
 @TestPropertySource(
         locations = "classpath:application-test.properties")
-public class BidListServiceTest {
+public class BidListControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
@@ -90,6 +85,7 @@ public class BidListServiceTest {
 
         Optional<BidList> result = Optional.of(new BidList());
         doReturn(result).when(bidListRepository).findById(1);
+
         MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.get("/bidList/update/1").accept(MediaType.APPLICATION_JSON_VALUE)).andReturn();
 
         assertTrue(mvcResult.getResponse().getStatus() == 200);
@@ -107,7 +103,7 @@ public class BidListServiceTest {
                         .with(csrf())
                         .accept(MediaType.ALL)).andReturn();
 
-        //Verify entry is added to DB and we are redirected (302)
+        //Verify entry is updated in DB and we are redirected (302)
         assertTrue(mvcResult.getResponse().getStatus() == 302);
         Mockito.verify(bidListRepository, Mockito.times(1)).save(any(BidList.class));
     }
@@ -121,6 +117,7 @@ public class BidListServiceTest {
 
         MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.get("/bidList/delete/1").accept(MediaType.APPLICATION_JSON_VALUE)).andReturn();
 
+        //Verify entry is removed from DB and we are redirected (302)
         assertTrue(mvcResult.getResponse().getStatus() == 302);
         Mockito.verify(bidListRepository, Mockito.times(1)).delete(any(BidList.class));
     }
