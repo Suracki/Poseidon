@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+    <curvepoint
+        id="1"
+        curveid="3"
+        term="123"
+		value="456"
+    />
+	<curvepoint
+        id="2"
+        curveid="4"
+        term="456"
+		value="789"
+    />
+</dataset>

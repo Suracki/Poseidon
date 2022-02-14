@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+    <rulename
+        id="1"
+        name="rulenameone"
+        description="descone"
+		json="jsonone"
+		template="tempone"
+		sqlstr="strone"
+		sqlpart="partone"
+    />
+	<rulename
+        id="2"
+        name="rulenametwo"
+        description="desctwo"
+		json="jsontwo"
+		template="temptwo"
+		sqlstr="strtwo"
+		sqlpart="parttwo"
+    />
+</dataset>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+    <trade
+        tradeid="1"
+        account="accOne"
+        type="typeOne"
+		buyquantity="123"
+    />
+	<trade
+        tradeid="2"
+        account="accTwo"
+        type="typeTwo"
+		buyquantity="456"
+    />
+</dataset>

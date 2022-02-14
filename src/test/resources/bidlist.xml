@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+    <bidlist
+        bidlistid="1"
+        account="TestAccount"
+        type="TestType"
+		bidquantity="123"
+    />
+	<bidlist
+        bidlistid="2"
+        account="TestAccountTwo"
+        type="TestTypeTwo"
+		bidquantity="456"
+    />
+</dataset>
