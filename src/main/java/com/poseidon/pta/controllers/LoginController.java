@@ -9,6 +9,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+/**
+ * Controller for login functions
+ *
+ */
 @Controller
 @RequestMapping("app")
 public class LoginController {
@@ -18,6 +22,13 @@ public class LoginController {
     @Autowired
     private UserRepository userRepository;
 
+    /**
+     * Mapping for login
+     *
+     * Creates and returns ModelAndView object for login
+     *
+     * @return ModelAndView
+     */
     @GetMapping("login")
     public ModelAndView login() {
         logger.info("User connected to login endpoint");
@@ -26,6 +37,13 @@ public class LoginController {
         return mav;
     }
 
+    /**
+     * Mapping for secure/article-details
+     *
+     * Creates and returns ModelAndView object for users/list containing all Users found in the repo
+     *
+     * @return ModelAndView
+     */
     @GetMapping("secure/article-details")
     public ModelAndView getAllUserArticles() {
         logger.info("User connected to login endpoint, accessing user/list");
@@ -35,6 +53,14 @@ public class LoginController {
         return mav;
     }
 
+    /**
+     * Mapping for error
+     *
+     * Creates and returns ModelAndView object for access attempts by unauthorized users
+     * Returns 403 error
+     *
+     * @return ModelAndView
+     */
     @GetMapping("error")
     public ModelAndView error() {
         logger.info("User not authorized");
