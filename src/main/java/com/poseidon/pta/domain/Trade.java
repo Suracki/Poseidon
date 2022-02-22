@@ -1,39 +1,66 @@
 package com.poseidon.pta.domain;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.sql.Timestamp;
 
 
 @Entity
 @Table(name = "trade")
-public class Trade {
+public class Trade implements DomainElement {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
+    @Column(name = "tradeid")
     private Integer tradeId;
+    @NotBlank(message = "Account is mandatory")
     private String account;
+    @NotBlank(message = "Type is mandatory")
     private String type;
+    @NotNull(message = "BuyQuantity is mandatory")
+    @Column(name = "buyquantity")
     private Double buyQuantity;
+    @Column(name = "sellquantity")
     private Double sellQuantity;
+    @Column(name = "buyprice")
     private Double buyPrice;
+    @Column(name = "sellprice")
     private Double sellPrice;
     private String benchmark;
+    @Column(name = "tradedate")
     private Timestamp tradeDate;
     private String security;
     private String status;
     private String trader;
     private String book;
+    @Column(name = "creationname")
     private String creationName;
+    @Column(name = "creationdate")
     private Timestamp creationDate;
+    @Column(name = "revisionnname")
     private String revisionName;
+    @Column(name = "revisiondate")
     private Timestamp revisionDate;
+    @Column(name = "dealname")
     private String dealName;
+    @Column(name = "dealtype")
     private String dealType;
+    @Column(name = "sourcelistid")
     private String sourceListId;
     private String side;
+
+    public Trade() {
+    }
 
     public Trade(String account, String type) {
         this.account = account;
         this.type = type;
+    }
+
+    public Trade(String account, String type, Double buyQuantity) {
+        this.account = account;
+        this.type = type;
+        this.buyQuantity = buyQuantity;
     }
 
     public Integer getTradeId() {
@@ -41,6 +68,10 @@ public class Trade {
     }
 
     public void setTradeId(Integer tradeId) {
+        this.tradeId = tradeId;
+    }
+
+    public void setId(Integer tradeId) {
         this.tradeId = tradeId;
     }
 

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+    <users
+        id="1"
+        fullname="TestFullName"
+        username="TestUserName"
+		role="ADMIN"
+		password="$2a$12$YU1k9gDedghY2bUq1ya/se18F4lTrJvhtxDRxkT8MZM44DoYVisWG"
+    />
+	<users
+        id="2"
+        fullname="TestFullNameTwo"
+        username="TestUserNameTwo"
+		role="ADMIN"
+		password="$2a$12$YU1k9gDedghY2bUq1ya/se18F4lTrJvhtxDRxkT8MZM44DoYVisWG"
+    />
+</dataset>

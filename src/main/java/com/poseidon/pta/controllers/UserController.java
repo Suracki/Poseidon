@@ -1,9 +1,10 @@
 package com.poseidon.pta.controllers;
 
 import com.poseidon.pta.domain.User;
-import com.poseidon.pta.repositories.UserRepository;
+import com.poseidon.pta.services.UserService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -14,63 +15,110 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
 
+/**
+ * RestController for /user endpoint
+ *
+ */
 @Controller
 public class UserController {
     @Autowired
-    private UserRepository userRepository;
+    private UserService userService;
 
+    private static final Logger logger = LogManager.getLogger("UserController");
+
+    /**
+     * Mapping for /list
+     *
+     * Calls userService.home method to populate model and get redirect for list
+     *
+     * @param model Model object to hold data loaded from repo
+     * @return url string
+     */
     @RequestMapping("/user/list")
     public String home(Model model)
     {
-        model.addAttribute("users", userRepository.findAll());
-        return "user/list";
+        logger.info("User connected to /user/list endpoint");
+        return userService.home(model);
     }
 
+    /**
+     * Mapping for GET /add
+     *
+     * Calls userService.addUser method to get redirect for form to add new User element
+     *
+     * @param user User object
+     * @return url string
+     */
     @GetMapping("/user/add")
-    public String addUser(User bid) {
-        return "user/add";
+    public String addUser(User user) {
+        logger.info("User connected to /user/add endpoint");
+        return userService.addUser(user);
     }
 
+    /**
+     * Mapping for POST /add
+     *
+     * Calls userService.validate method to validate provided User element
+     * Adds element to repo if valid & updates model
+     * Returns to add form if not valid
+     *
+     * @param user User object
+     * @param result BindingResult for validation
+     * @param model Model model object
+     * @return url string
+     */
     @PostMapping("/user/validate")
     public String validate(@Valid User user, BindingResult result, Model model) {
-        if (!result.hasErrors()) {
-            BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-            user.setPassword(encoder.encode(user.getPassword()));
-            userRepository.save(user);
-            model.addAttribute("users", userRepository.findAll());
-            return "redirect:/user/list";
-        }
-        return "user/add";
+        logger.info("User connected to /user/validate endpoint");
+        return userService.validate(user, result, model);
     }
 
+    /**
+     * Mapping for GET /update/{id}
+     *
+     * Calls userService.showUpdateForm method to get redirect for form to update existing User element
+     *
+     * @param id User's ID value
+     * @param model Model model object
+     * @return url string
+     */
     @GetMapping("/user/update/{id}")
     public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
-        User user = userRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + id));
-        user.setPassword("");
-        model.addAttribute("user", user);
-        return "user/update";
+        logger.info("User connected to /user/update/ GET endpoint for user with id " + id);
+        return userService.showUpdateForm(id, model);
     }
 
+    /**
+     * Mapping for POST /update/{id}
+     *
+     * Calls userService.updateUser method to validate provided User element
+     * Updates existing element in repo if valid & updates model
+     * Returns to update form if not valid
+     *
+     * @param id User's ID value
+     * @param model Model model object
+     * @return url string
+     */
     @PostMapping("/user/update/{id}")
     public String updateUser(@PathVariable("id") Integer id, @Valid User user,
                              BindingResult result, Model model) {
-        if (result.hasErrors()) {
-            return "user/update";
-        }
-
-        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-        user.setPassword(encoder.encode(user.getPassword()));
-        user.setId(id);
-        userRepository.save(user);
-        model.addAttribute("users", userRepository.findAll());
-        return "redirect:/user/list";
+        logger.info("User connected to /user/update/ POST endpoint for user with id " + id);
+        return userService.updateUser(id, user, result, model);
     }
 
+    /**
+     * Mapping for GET /delete/{id}
+     *
+     * Calls userService.deleteUser method to delete User element with provided ID
+     * Deletes existing element in repo if exists & updates model
+     *
+     * @param id User's ID value
+     * @param model Model model object
+     * @return url string
+     */
     @GetMapping("/user/delete/{id}")
     public String deleteUser(@PathVariable("id") Integer id, Model model) {
-        User user = userRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + id));
-        userRepository.delete(user);
-        model.addAttribute("users", userRepository.findAll());
-        return "redirect:/user/list";
+        logger.info("User connected to /user/delete/ endpoint for user with id " + id);
+        return userService.deleteUser(id, model);
     }
 }

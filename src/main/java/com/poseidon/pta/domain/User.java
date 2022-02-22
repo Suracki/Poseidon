@@ -2,16 +2,18 @@ package com.poseidon.pta.domain;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 
 @Entity
 @Table(name = "users")
-public class User {
+public class User implements DomainElement {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Integer id;
     @NotBlank(message = "Username is mandatory")
     private String username;
-    @NotBlank(message = "Password is mandatory")
+    @Pattern(regexp = "^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!£@#$%]).{8,20}$",
+    message="Password must be 8-20 characters and include at least one lowercase letter, one uppercase letter, one number, and one symbol (!£@#$%).")
     private String password;
     @NotBlank(message = "FullName is mandatory")
     private String fullname;

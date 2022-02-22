@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+    <rating
+        id="1"
+        moodysRating="moodyOne"
+        sandPRating="sandOne"
+		fitchRating="fitchOne"
+		orderNumber="3"
+    />
+	<rating
+        id="2"
+        moodysRating="moodyTwo"
+        sandPRating="sandTwo"
+		fitchRating="fitchTwo"
+		orderNumber="4"
+    />
+</dataset>

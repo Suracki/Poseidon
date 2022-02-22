@@ -1,40 +1,58 @@
 package com.poseidon.pta.domain;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.sql.Timestamp;
 
 @Entity
 @Table(name = "bidlist")
-public class BidList {
+public class BidList implements DomainElement {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
+    @Column(name = "bidlistid")
     private Integer BidListId;
+    @NotBlank(message = "Account is mandatory")
+    @Column(name = "account")
     private String account;
+    @NotBlank(message = "Type is mandatory")
+    @Column(name = "type")
     private String type;
+    @NotNull(message = "BidQuantity is mandatory")
+    @Column(name = "bidquantity")
     private Double bidQuantity;
+    @Column(name = "askquantity")
     private Double askQuantity;
     private Double bid;
     private Double ask;
     private String benchmark;
+    @Column(name = "bidlistdate")
     private Timestamp bidListDate;
     private String commentary;
     private String security;
     private String status;
     private String trader;
     private String book;
+    @Column(name = "creationname")
     private String creationName;
+    @Column(name = "creationdate")
     private Timestamp creationDate;
+    @Column(name = "revisionname")
     private String revisionName;
+    @Column(name = "revisiondate")
     private Timestamp revisionDate;
+    @Column(name = "dealname")
     private String dealName;
+    @Column(name = "dealtype")
     private String dealType;
+    @Column(name = "sourcelistid")
     private String sourceListId;
     private String side;
 
     public BidList() {
     }
 
-    public BidList(String account, String type, double bidQuantity) {
+    public BidList(String account, String type, Double bidQuantity) {
         this.account = account;
         this.type = type;
         this.bidQuantity = bidQuantity;
@@ -45,6 +63,10 @@ public class BidList {
     }
 
     public void setBidListId(Integer bidListId) {
+        BidListId = bidListId;
+    }
+
+    public void setId(Integer bidListId) {
         BidListId = bidListId;
     }
 

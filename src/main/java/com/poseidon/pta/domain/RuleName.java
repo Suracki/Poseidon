@@ -1,19 +1,31 @@
 package com.poseidon.pta.domain;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "rulename")
-public class RuleName {
+public class RuleName implements DomainElement {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Integer id;
+    @NotBlank(message = "Name is mandatory")
     private String name;
+    @NotBlank(message = "Description is mandatory")
     private String description;
+    @NotBlank(message = "Json is mandatory")
     private String json;
+    @NotBlank(message = "Template is mandatory")
     private String template;
+    @NotBlank(message = "SQLStr is mandatory")
+    @Column(name = "sqlstr")
     private String sqlStr;
+    @NotBlank(message = "SQLPart is mandatory")
+    @Column(name = "sqlpart")
     private String sqlPart;
+
+    public RuleName() {
+    }
 
     public RuleName(String name, String description, String json, String template, String sqlStr, String sqlPart) {
         this.name = name;

@@ -1,17 +1,30 @@
 package com.poseidon.pta.domain;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "rating")
-public class Rating {
+public class Rating implements DomainElement {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Integer id;
+    @NotBlank(message = "MoodysRating is mandatory")
+    @Column(name = "moodysrating")
     private String moodysRating;
+    @NotBlank(message = "SandPRating is mandatory")
+    @Column(name = "sandprating")
     private String sandPRating;
+    @NotBlank(message = "FitchRating is mandatory")
+    @Column(name = "fitchrating")
     private String fitchRating;
+    @NotNull(message = "OrderNumber is mandatory")
+    @Column(name = "ordernumber")
     private Integer orderNumber;
+
+    public Rating() {
+    }
 
     public Rating(String moodysRating, String sandPRating, String fitchRating, int orderNumber) {
         this.moodysRating = moodysRating;
