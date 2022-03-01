@@ -1,10 +1,12 @@
 package com.poseidon.pta.controllers;
 
 import com.poseidon.pta.domain.User;
+import com.poseidon.pta.security.RoleCheck;
 import com.poseidon.pta.services.UserService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -24,6 +26,9 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private RoleCheck roleCheck;
+
     private static final Logger logger = LogManager.getLogger("UserController");
 
     /**
@@ -38,6 +43,12 @@ public class UserController {
     public String home(Model model)
     {
         logger.info("User connected to /user/list endpoint");
+
+        if (!roleCheck.RoleCheck("ADMIN")) {
+            logger.info("User is not an ADMIN, logging out and redirecting");
+            SecurityContextHolder.getContext().getAuthentication().setAuthenticated(false);
+            return "/home";
+        }
         return userService.home(model);
     }
 
@@ -52,6 +63,13 @@ public class UserController {
     @GetMapping("/user/add")
     public String addUser(User user) {
         logger.info("User connected to /user/add endpoint");
+
+        if (!roleCheck.RoleCheck("ADMIN")) {
+            logger.info("User is not an ADMIN, logging out and redirecting");
+            SecurityContextHolder.getContext().getAuthentication().setAuthenticated(false);
+            return "/home";
+        }
+
         return userService.addUser(user);
     }
 
@@ -70,6 +88,13 @@ public class UserController {
     @PostMapping("/user/validate")
     public String validate(@Valid User user, BindingResult result, Model model) {
         logger.info("User connected to /user/validate endpoint");
+
+        if (!roleCheck.RoleCheck("ADMIN")) {
+            logger.info("User is not an ADMIN, logging out and redirecting");
+            SecurityContextHolder.getContext().getAuthentication().setAuthenticated(false);
+            return "/home";
+        }
+
         return userService.validate(user, result, model);
     }
 
@@ -85,6 +110,13 @@ public class UserController {
     @GetMapping("/user/update/{id}")
     public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
         logger.info("User connected to /user/update/ GET endpoint for user with id " + id);
+
+        if (!roleCheck.RoleCheck("ADMIN")) {
+            logger.info("User is not an ADMIN, logging out and redirecting");
+            SecurityContextHolder.getContext().getAuthentication().setAuthenticated(false);
+            return "/home";
+        }
+
         return userService.showUpdateForm(id, model);
     }
 
@@ -103,6 +135,13 @@ public class UserController {
     public String updateUser(@PathVariable("id") Integer id, @Valid User user,
                              BindingResult result, Model model) {
         logger.info("User connected to /user/update/ POST endpoint for user with id " + id);
+
+        if (!roleCheck.RoleCheck("ADMIN")) {
+            logger.info("User is not an ADMIN, logging out and redirecting");
+            SecurityContextHolder.getContext().getAuthentication().setAuthenticated(false);
+            return "/home";
+        }
+
         return userService.updateUser(id, user, result, model);
     }
 
@@ -119,6 +158,13 @@ public class UserController {
     @GetMapping("/user/delete/{id}")
     public String deleteUser(@PathVariable("id") Integer id, Model model) {
         logger.info("User connected to /user/delete/ endpoint for user with id " + id);
+
+        if (!roleCheck.RoleCheck("ADMIN")) {
+            logger.info("User is not an ADMIN, logging out and redirecting");
+            SecurityContextHolder.getContext().getAuthentication().setAuthenticated(false);
+            return "/home";
+        }
+
         return userService.deleteUser(id, model);
     }
 }
